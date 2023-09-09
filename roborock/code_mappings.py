@@ -173,6 +173,15 @@ class RoborockFanSpeedQ7Max(RoborockFanPowerCode):
     max = 104
 
 
+class RoborockFanSpeedP10(RoborockFanPowerCode):
+    off = 105
+    quiet = 101
+    balanced = 102
+    turbo = 103
+    max = 104
+    max_plus = 108
+
+
 class RoborockMopModeCode(RoborockEnum):
     """Describes the mop mode of the vacuum cleaner."""
 
@@ -247,7 +256,7 @@ class RoborockDockTypeCode(RoborockEnum):
     auto_empty_dock_pure = 5
     s7_max_ultra_dock = 6
     s8_dock = 7
-    q_revo = 8
+    p10_dock = 8
 
 
 class RoborockDockDustCollectionModeCode(RoborockEnum):

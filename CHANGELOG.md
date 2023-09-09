@@ -2,6 +2,24 @@
 
 <!--next-version-placeholder-->
 
+## v0.33.2 (2023-09-06)
+
+### Fix
+
+* Add missing s5 codes ([#116](https://github.com/humbertogontijo/python-roborock/issues/116)) ([`4d56021`](https://github.com/humbertogontijo/python-roborock/commit/4d560216354fab4ab8b1d452dd6b29008b20d50a))
+
+## v0.33.1 (2023-09-06)
+
+### Fix
+
+* Unknow values on HA component ([#117](https://github.com/humbertogontijo/python-roborock/issues/117)) ([`1323618`](https://github.com/humbertogontijo/python-roborock/commit/1323618c6c58bb6dcef5c7f5f2ca12e32969ba0f))
+
+## v0.33.0 (2023-09-04)
+
+### Feature
+
+* Add q revo/p10 support ([#114](https://github.com/humbertogontijo/python-roborock/issues/114)) ([`b2237d9`](https://github.com/humbertogontijo/python-roborock/commit/b2237d97384d819cbcc62902bbcbb2c7dbe0072e))
+
 ## v0.32.4 (2023-08-30)
 
 ### Fix

@@ -283,6 +283,7 @@ class Status(RoborockBase):
     charge_status: Optional[int] = None
     unsave_map_reason: Optional[int] = None
     unsave_map_flag: Optional[int] = None
+    dry_status: Optional[bool] = None
 
     def __post_init__(self) -> None:
         self.square_meter_clean_area = round(self.clean_area / 1000000, 1) if self.clean_area is not None else None
@@ -410,15 +411,22 @@ class Consumable(RoborockBase):
     main_brush_work_time: Optional[int] = None
     side_brush_work_time: Optional[int] = None
     filter_work_time: Optional[int] = None
-    filter_element_work_time: Optional[int] = None
     sensor_dirty_time: Optional[int] = None
     strainer_work_times: Optional[int] = None
+    filter_element_work_time: Optional[int] = None
     dust_collection_work_times: Optional[int] = None
     cleaning_brush_work_times: Optional[int] = None
+
+    # Time left calculations
     main_brush_time_left: Optional[int] = None
     side_brush_time_left: Optional[int] = None
     filter_time_left: Optional[int] = None
     sensor_time_left: Optional[int] = None
+    #TODO: Figure out times to calculate these
+    strainer_time_left: Optional[int] = None
+    filter_element_time_left: Optional[int] = None
+    dust_collection_time_left: Optional[int] = None
+    cleaning_brush_time_left: Optional[int] = None
 
     def __post_init__(self) -> None:
         self.main_brush_time_left = (

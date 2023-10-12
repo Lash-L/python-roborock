@@ -8,7 +8,7 @@ from datetime import timezone
 from enum import Enum
 from typing import Any, NamedTuple
 
-from dacite import Config, from_dict
+from dacite import Config, from_dict, WrongTypeError
 
 from .code_mappings import (
     RoborockDockDustCollectionModeCode,
@@ -51,6 +51,8 @@ from .const import (
     SIDE_BRUSH_REPLACE_TIME,
 )
 
+from .dacite_backport import backport_from_dict
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -82,12 +84,23 @@ def decamelize_obj(d: dict | list, ignore_keys: list[str]):
 class RoborockBase:
     _ignore_keys = []  # type: ignore
     is_cached = False
+    reported_dacite_once = False
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]):
         if isinstance(data, dict):
             ignore_keys = cls._ignore_keys
-            return from_dict(cls, decamelize_obj(data, ignore_keys), config=Config(cast=[Enum]))
+            try:
+                return from_dict(cls, decamelize_obj(data, ignore_keys), config=Config(cast=[Enum]))
+            except WrongTypeError:
+                if not RoborockBase.reported_dacite_once:
+                    _LOGGER.warning(
+                        "You seem to have an outdated version of dacite, we required at least version 1.7.0, "
+                        "anything lower will break. We have a backport included that will fix the problem, "
+                        "but it is likely to break - so it is recommended you ensure you have at least 1.7.0 "
+                        "(preferably >=1.8.0)")
+                    RoborockBase.reported_dacite_once = True
+                return backport_from_dict(cls, decamelize_obj(data, ignore_keys), config=Config(cast=[Enum]))
 
     def as_dict(self) -> dict:
         return asdict(
